@@ -1,6 +1,10 @@
-package database;
+package ui.database;
+
+import ui.model.ProductModel;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DbHandler {
     private static final String HOST = "localhost";
@@ -52,18 +56,22 @@ public class DbHandler {
         }
     }
 
-    public static void showTables() {
+    public static List<ProductModel> getProductItems() {
         DbHandler dbHandler = new DbHandler();
-        System.out.println("Task 4:");
+        List<ProductModel> productModels = new ArrayList<>();
         try (Connection connection = dbHandler.getDbConnection(); Statement stmt = connection.createStatement();) {
-            ResultSet str = stmt.executeQuery("SELECT * FROM newiteminrozetkastore;");
+            ResultSet str = stmt.executeQuery("SELECT * FROM product_list;");
             while (str.next()) {
-                System.out.println(str.getString(1) + " " + str.getString(2));
+                productModels.add(new ProductModel(str.getString("item_name"),
+                        str.getInt("item_price"),
+                        str.getString("is_available")));
             }
+
             System.out.println("Done");
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
         }
+        return productModels;
     }
 }
 
