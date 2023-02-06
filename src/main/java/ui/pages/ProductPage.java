@@ -1,4 +1,4 @@
-package pages;
+package ui.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,7 +9,7 @@ public class ProductPage extends BasePage{
         super(driver);
     }
 
-    @FindBy(xpath = "//p[@class = \"product-prices__big\"]")
+    @FindBy(xpath = "//p[contains(@class, \"product-prices__big\")]")
     private WebElement priceField;
 
     public String  getPrice(){

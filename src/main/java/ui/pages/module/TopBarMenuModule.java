@@ -1,9 +1,9 @@
-package pages.module;
+package ui.pages.module;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.BasePage;
+import ui.pages.BasePage;
 
 public class TopBarMenuModule extends BasePage {
     public TopBarMenuModule(WebDriver driver) {

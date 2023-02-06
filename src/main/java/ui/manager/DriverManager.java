@@ -1,4 +1,4 @@
-package manager;
+package ui.manager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -27,7 +27,7 @@ public class DriverManager {
         options.addArguments("-incognito", "--disable-popup-blocking");
         WebDriver driver = new ChromeDriver(options);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return driver;
     }
     public void closeDriver() {

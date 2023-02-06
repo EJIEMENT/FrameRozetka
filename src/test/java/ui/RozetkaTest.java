@@ -1,19 +1,25 @@
-import logger.TestLogger;
-import manager.DriverManager;
-import model.ProductModel;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import pages.CatalogPage;
-import pages.HomePage;
-import pages.ProductPage;
-import pages.WishListPage;
+package ui;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import logger.TestLogger;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import ui.database.DbHandler;
+import ui.manager.DriverManager;
+import ui.model.ProductModel;
+import ui.pages.CatalogPage;
+import ui.pages.HomePage;
+import ui.pages.ProductPage;
+import ui.pages.WishListPage;
+
+import java.util.List;
+
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 public class RozetkaTest {
     TestLogger logger = new TestLogger();
+    List<ProductModel> products = DbHandler.getProductItems();
     DriverManager driverManager = new DriverManager();
     HomePage homePage = new HomePage(driverManager.getDriver());
     CatalogPage catalogPage = new CatalogPage(driverManager.getDriver());
@@ -21,7 +27,7 @@ public class RozetkaTest {
     WishListPage wishListPage = new WishListPage(driverManager.getDriver());
     ProductModel powerStation = new ProductModel("powerstation", 100000);
 
-    @BeforeEach
+    @BeforeMethod
     public void startDriver() {
         TestLogger.logInfo("driver start successes");
         driverManager.startDriver();
@@ -30,21 +36,21 @@ public class RozetkaTest {
     @Test
     public void itemTest() {
         TestLogger.logInfo("Start ItemTest test");
-        homePage.searchItemModel(powerStation.getItem());
+        homePage.searchItemModel(products.get(0).getItem());
         catalogPage.clickOnFirstProduct();
-        assertTrue(Integer.parseInt(productPage.getPrice()) < powerStation.getPrice());
+        assertTrue(Integer.parseInt(productPage.getPrice()) < products.get(0).getPrice());
     }
 
     @Test
     public void checkCountItemInWishlist() {
         TestLogger.logInfo("Start checkCountItemInWishlist test");
-        homePage.searchItemModel(powerStation.getItem());
+        homePage.searchItemModel(products.get(1).getItem());
         catalogPage.addItemToWishList();
         catalogPage.getTopBarMenuModule().openWishList();
         assertEquals(2, wishListPage.getWishListSize());
     }
 
-    @AfterEach
+    @AfterMethod
     public void closeDriver() {
         driverManager.closeDriver();
         TestLogger.logInfo("Driver close");
