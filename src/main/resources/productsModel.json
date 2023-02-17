@@ -1,0 +1,17 @@
+[
+  {
+    "item": "powerstation",
+    "price": 12345,
+    "isAvailable": "yes"
+  },
+  {
+    "item": "phone",
+    "price": 358922,
+    "isAvailable": "yes"
+  },
+  {
+    "item": "tablet",
+    "price": 7345,
+    "isAvailable": "no"
+  }
+]

@@ -1,5 +1,11 @@
 package ui.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "productModel")
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class ProductModel {
     private String item;
     private Integer price;
@@ -26,6 +32,18 @@ public class ProductModel {
                 ", price=" + price +
                 ", isAvailable='" + isAvailable + '\'' +
                 '}';
+    }
+
+    public void setItem(String item) {
+        this.item = item;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public void setIsAvailable(String isAvailable) {
+        this.isAvailable = isAvailable;
     }
 
     public String getItem() {

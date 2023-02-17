@@ -28,7 +28,7 @@ public class TestAPI {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(dependsOnMethods = {"postPetInStore"})
     public void deletePetFromStore() {
         Response response = given().when().delete("https://petstore.swagger.io/v2/pet/555");
         SoftAssert softAssert = new SoftAssert();

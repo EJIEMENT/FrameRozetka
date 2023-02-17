@@ -1,0 +1,6 @@
+<?xml version = "1.0"?>
+<productModel>
+    <item>Powerstation</item>
+    <price>10000</price>
+    <isAvailable>yes</isAvailable>
+</productModel>
