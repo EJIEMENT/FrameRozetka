@@ -1,6 +1,7 @@
 package ui.parser;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ui.model.LombokProduct;
 import ui.model.ProductModel;
 
 import java.io.File;
@@ -51,6 +52,25 @@ public class JsonParser implements Parser {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void writeLombokObject(String filePath, LombokProduct lombokProduct) {
+        try {
+            mapper.writeValue(new File(filePath + ".json"), lombokProduct);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public LombokProduct readLombokObject(String filePath) {
+        LombokProduct lombokProduct = null;
+        try {
+            lombokProduct = mapper.readValue(new File(filePath + ".json"), LombokProduct.class);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return lombokProduct;
     }
 }
 

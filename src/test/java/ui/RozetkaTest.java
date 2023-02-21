@@ -1,17 +1,21 @@
 package ui;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import logger.TestLogger;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ui.database.DbHandler;
 import ui.manager.DriverManager;
+import ui.model.LombokProduct;
 import ui.model.ProductModel;
 import ui.pages.CatalogPage;
 import ui.pages.HomePage;
 import ui.pages.ProductPage;
 import ui.pages.WishListPage;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.testng.AssertJUnit.assertEquals;
@@ -55,6 +59,7 @@ public class RozetkaTest {
         driverManager.closeDriver();
         TestLogger.logInfo("Driver close");
     }
+
 
 
 }

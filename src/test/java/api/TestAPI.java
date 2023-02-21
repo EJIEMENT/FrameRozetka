@@ -1,9 +1,14 @@
 package api;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import ui.model.LombokProduct;
+
+import java.io.IOException;
 
 import static io.restassured.RestAssured.given;
 
@@ -33,5 +38,11 @@ public class TestAPI {
         Response response = given().when().delete("https://petstore.swagger.io/v2/pet/555");
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(response.getStatusCode(), 200);
+    }
+    @Test
+    public void withProductDeserializeSuccessfully() throws IOException {
+        String json = "{\"name\":\"Powerstation\",\"price\":10000,\"isAvailable\":\"yes\"}";
+        LombokProduct lombokProduct = new ObjectMapper().readValue(json, LombokProduct.class);
+        Assert.assertEquals(new LombokProduct("Powerstation",10000,"yes"),lombokProduct);
     }
 }
